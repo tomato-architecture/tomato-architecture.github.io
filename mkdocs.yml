@@ -1,0 +1,36 @@
+site_name: "Tomato Architecture"
+site_description: "A pragmatic approach to software development"
+site_author: "K Siva Prasad Reddy"
+site_url: "https://tomato-architecture.netlify.app/"
+
+# Repository
+repo_name: "tomato-architecture/tomato-architecture.github.io"
+repo_url: "https://github.com/tomato-architecture/tomato-architecture.github.io"
+
+# Copyright
+copyright: "Copyright &copy; 2025 SivaLabs"
+
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Concepts: concepts.md
+  - Implementations:
+      - Spring Boot: spring-boot-impl.md
+  - FAQs: faq.md
+
+# Customization
+extra:
+  manifest: "manifest.webmanifest"
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: "https://github.com/tomato-architecture"
+    - icon: fontawesome/brands/twitter
+      link: "https://twitter.com/sivalabs"
+    - icon: fontawesome/brands/linkedin
+      link: "https://www.linkedin.com/in/ksivaprasadreddy/"
+
+# Extensions
+markdown_extensions:
+  - codehilite
+  - tables
