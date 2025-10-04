@@ -1,8 +1,38 @@
 # Tomato Architecture
 
-![tomato-architecture-logo.png](/assets/tomato-arc-logo.png)
+![tomato-architecture-logo.png](assets/tomato-arc-logo.png)
 
 **Tomato Architecture** is a pragmatic approach to software architecture following the **Core Principles**
+
+## Background
+When I began exploring software architecture, I came across several well-known approaches such as [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html), [The Hexagonal (Ports & Adapters) Architecture](https://alistair.cockburn.us/hexagonal-architecture), and [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/). At their core, these architectures share similar goals — promoting solid software design principles like separation of concerns, testability, and loose coupling.
+
+Along with these principles, they also introduced certain practices that made sense for their time. For instance, when integration testing used to be difficult, isolating business logic from framework dependencies and "programming to interfaces" were great strategies to enable in-memory or mocked testing. Those ideas worked well for the challenges of that era.
+
+However, over time, some of these practices have been taken to extremes. You'll often hear recommendations like:
+
+* "Your business logic should depend only on the JDK — no external libraries allowed."
+* "Create your own logging abstraction."
+* "Avoid framework annotations and write XML instead to keep your core 'pure'"
+
+While these ideas may sound elegant in theory, in practice they often add unnecessary complexity.
+Modern frameworks and libraries already solve many of these recurring problems. In the real world, companies rarely switch frameworks, databases, or message brokers overnight. Building multiple abstraction layers just to guard against that possibility usually results in more boilerplate and less productivity.
+
+I've seen teams implementing Clean, Hexagonal, or Onion architectures spend a surprising amount of time on:
+
+* Copying data objects across multiple layers,
+* Creating endless interfaces with only one implementation,
+* Re-implementing features (like cross-cutting concerns) that frameworks already handle elegantly.
+
+With the tools we have today — Mockito for mocking concrete classes, Testcontainers for testing with real dependencies, and frameworks like Spring Boot or Quarkus that already abstract away much of the complexity — many of these additional layers are simply unnecessary.
+
+![cargo-cult-programming.png](assets/cargo-cult-programming.png)
+
+So I decided to take a more pragmatic approach:
+**Keep the timeless principles, embrace modern tooling, and focus on building simple, testable, and maintainable software — without the dogma or ceremony.**
+
+That's how **Tomato Architecture** was born:
+**A blend of the best ideas from existing architectures, minus the cargo-cult, idealistic, and purist mindset.**
 
 ## Core Principles
 * Focus on simplicity — solve today's problems without overengineering for hypothetical future needs.
@@ -10,9 +40,12 @@
 * Design systems that work cohesively as a whole, not just as isolated, well-tested components.
 * Make architectural decisions based on what truly benefits your software — not merely because it's a trend or endorsed by popular voices.
 
-## Architecture Diagram
+![tomato-architecture-logo.png](assets/tomato-architecture-principles.png)
 
-![tomato-architecture.png](/assets/tomato-architecture.png)
+## Architecture Diagram
+A simple layered architecture with strict modularity goes a long way towards achieving the Tomato Architecture goals.
+
+![tomato-architecture.png](assets/tomato-architecture.png)
 
 ## Implementation Guidelines
 
