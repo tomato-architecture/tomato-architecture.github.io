@@ -5,10 +5,10 @@
 **Tomato Architecture** is a pragmatic approach to software architecture following the **Core Principles**
 
 ## Core Principles
-* Strive to keep things simple instead of overengineering the solution by guessing the requirements for the next decade.
-* Do research, evaluate, then pick a technology and embrace it instead of creating abstractions with replaceability in mind.
-* Make sure your solution is working as a whole, not just individual units.
-* Think what is best for your software over blindly following suggestions by popular people.
+* Focus on simplicity — solve today's problems without overengineering for hypothetical future needs.
+* Research, evaluate, and then commit to the right technologies instead of building layers of unnecessary abstraction for the sake of "future replaceability."
+* Design systems that work cohesively as a whole, not just as isolated, well-tested components.
+* Make architectural decisions based on what truly benefits your software — not merely because it's a trend or endorsed by popular voices.
 
 ## Architecture Diagram
 
@@ -17,29 +17,27 @@
 ## Implementation Guidelines
 
 ### 1. Package by feature
-A common pattern to organize code into packages is by splitting based on technical layers such as controllers, services, repositories, etc.
-If you are building a Microservice which is already focusing on a specific module or business capability, then this approach might be fine.
+A common way to organize code is by technical layers — separating controllers, services, repositories, and so on.
+While this approach can work well for a microservice that already represents a single, well-defined business capability, it often becomes cumbersome in larger applications.
 
-If you are building a monolith or modular-monolith, then it is strongly recommended to first split by features instead of technical layers.
+For monolithic or modular-monolithic architectures, it is strongly recommended to organize code by feature rather than by technical layer. This structure keeps related functionality together, making the codebase easier to navigate, maintain, and evolve.
 
-For more info read: [https://phauer.com/2020/package-by-feature/](https://phauer.com/2020/package-by-feature/)
+For a deeper dive, check out: [https://phauer.com/2020/package-by-feature/](https://phauer.com/2020/package-by-feature/)
 
 ### 2. "Application Core" for Business Logic
-Keep "Application Core" independent of any delivery mechanism (Web, Scheduler Jobs, CLI).
+Keep the **Application Core** completely independent of any delivery mechanism — whether it's a web API, scheduled job, or command-line interface.
 
-The Application Core should expose APIs that can be invoked from a main() method.
-To achieve that, the "Application Core" should not depend on its invocation context.
-Which means the "Application Core" should not depend on any HTTP/Web layer libraries.
-Similarly, if your Application Core is being used from Scheduled Jobs or CLI, then
-any Scheduling logic or CLI command execution logic should never leak into Application Core.
+The core should expose well-defined APIs that can be invoked directly from a simple `main()` method.
+To achieve this, the Application Core must remain agnostic to its execution context — it should not depend on HTTP frameworks, web libraries, or any delivery-specific components.
+
+Likewise, if the same core logic is reused in scheduled jobs or CLI tools, ensure that scheduling or command execution details never leak into the Application Core.
 
 ### 3. Separation of Concerns
-Separate the business logic execution from input sources (Web Controllers, Message Listeners, Scheduled Jobs, etc).
+Keep the business logic execution independent of how the input arrives — whether through web controllers, message listeners, or scheduled jobs.
 
-The input sources such as Web Controllers, Message Listeners, Scheduled Jobs, etc. should be a thin layer extracting the data
-from request and delegate the actual business logic execution to "Application Core".
+Input sources should act as thin layer to extract the required data from the request source and delegate all business logic to the Application Core.
 
-**DON'T DO THIS**
+**🚫 DON'T DO THIS**
 
 ```java
 @RestController
@@ -57,7 +55,7 @@ class CustomerController {
 }
 ```
 
-**INSTEAD, DO THIS**
+**✅ INSTEAD, DO THIS**
 
 ```java
 @RestController
@@ -85,10 +83,9 @@ class CustomerService {
 }
 ```
 
-With this approach, whether you try to create a Customer from a REST API call or from a CLI,
-all the business logic is centralized in Application Core.
+With this approach, whether a customer is created via REST, CLI, or any other interface, the business logic remains centralized in the Application Core.
 
-**DON'T DO THIS**
+**🚫 DON'T DO THIS**
 
 ```java
 @Component
@@ -110,7 +107,7 @@ class OrderProcessingJob {
 }
 ```
 
-**INSTEAD, DO THIS**
+**✅ INSTEAD, DO THIS**
 
 ```java
 @Component
@@ -135,16 +132,13 @@ class OrderService {
 }
 ```
 
-With this approach, you can decouple order processing logic from scheduler
-and can test independently without triggering through Scheduler.
+This decouples order processing logic from the scheduler, allowing you to test and reuse it independently of any scheduling mechanism.
 
-From the Application Core we may talk to database, message brokers or 3rd party web services, etc.
-Care must be taken such that business logic executors do not heavily depend on External Service Integrations.
+Your Application Core may interact with databases, message brokers, or third-party services — but ensure these integrations don't leak into your business logic.
 
-For example, assume you are using Spring Data JPA for persistence, and
-from your **CustomerService** you would like to fetch customers using pagination.
+For example, when using a persistence framework like Spring Data JPA, avoid tying your service logic directly to its APIs.
 
-**DON'T DO THIS**
+**🚫 DON'T DO THIS**
 
 ```java
 @Service
@@ -160,7 +154,7 @@ class CustomerService {
 }
 ```
 
-**INSTEAD, DO THIS**
+**✅ INSTEAD, DO THIS**
 
 ```java
 @Service
@@ -183,12 +177,12 @@ class JpaCustomerRepository {
 }
 ```
 
-This way any persistence library changes will only affect the repository layer.
+This way, changes to your persistence framework or infrastructure only affect the repository layer, leaving your business logic clean and stable.
 
 ### 4. Domain logic in domain objects
-Keep domain logic in domain objects.
+Keep domain behavior close to the data it operates on — inside your domain objects.
 
-**DON'T DO THIS**
+**🚫 DON'T DO THIS**
 
 ```java
 
@@ -212,10 +206,10 @@ class CartService {
 }
 ```
 
-Here `calculateCartTotal()` method contains domain logic purely based on the state of `Cart` object.
-So, it should be part of the domain object `Cart`.
+In this example, the `calculateCartTotal()` method contains pure domain logic based solely on the state of `Cart`.
+Such logic belongs inside the `Cart` domain object itself — not in a service class.
 
-**INSTEAD, DO THIS**
+**✅ INSTEAD, DO THIS**
 
 ```java
 
@@ -240,27 +234,24 @@ class CartService {
 ```
 
 ### 5. No unnecessary interfaces
-Don't create interfaces with the hope that someday we might add another implementation for this interface.
-If that day ever comes, then with the powerful IDEs we have now, it is just a matter of extracting the interface in a couple of keystrokes.
+Don't create interfaces just because "we might need another implementation someday."
+If that day ever comes, modern IDEs make it trivial to extract an interface with just a few keystrokes.
 
-If the reason for creating an interface is for testing with Mock implementation,
-we have mocking libraries like Mockito which are capable of mocking classes without implementing interfaces.
+If your only reason for introducing an interface is to make testing easier — you don't need to.
+Mocking frameworks like Mockito can mock concrete classes just fine.
 
-So, unless there is a good reason, don't create interfaces.
+In short, only create interfaces when you have a clear and valid reason — not out of habit or hypothetical future needs.
 
 ### 6. Embrace framework's power and flexibility
-Usually, the libraries and frameworks are created to address the common requirements that are required for a majority of the applications.
-So, when you choose a library/framework to build your application faster, then you should embrace it.
+Frameworks and libraries are built to solve the common challenges that most applications face.
+When you adopt one to accelerate development, make full use of its strengths — embrace it rather than hide it.
 
-Instead of leveraging the power and flexibility offered by the selected framework,
-creating an indirection or abstraction on top of the selected framework with the hope
-that someday you might switch the framework to a different one is usually a very bad idea.
+Creating extra layers of abstraction on top of your chosen framework, just in case you might switch to another someday, is usually counterproductive. It adds complexity without real benefit and often prevents you from leveraging the framework's full potential.
 
-For example, Spring Framework provides declarative support for handling database transactions, caching, method-level security etc.
-Introducing our own similar annotations and re-implementing the same features support
-by delegating the actual handling to the framework is unnecessary.
+For example, the Spring Framework already provides powerful, declarative support for transactions, caching, and method-level security.
+Re-creating these mechanisms through custom annotations that merely delegate to Spring's features offers no real advantage.
 
-Instead, it's better to either directly use the framework's annotations or compose the annotation with additional semantics if needed.
+Instead, use the framework directly — or if you need additional semantics, compose your own annotations on top of it, like this:
 
 ```java
 @Target(ElementType.TYPE)
@@ -275,17 +266,14 @@ public @interface UseCase {
 }
 ```
 
+This approach keeps your code expressive while still taking full advantage of the framework's capabilities.
+
 ### 7. Test not only units, but whole features
 
-We should definitely write unit tests to test the units (business logic), by mocking external dependencies if required.
-But it is more important to verify whether the whole feature is working properly or not.
+Unit tests are essential — they validate individual pieces of business logic, often by mocking external dependencies. But beyond that, it's even more important to ensure that a complete feature actually works as expected.
 
-Even if our unit tests are running in milliseconds, can we go to production with confidence? Of course not.
-We should verify the whole feature is working or not by testing with the actual external dependencies such as database or message brokers.
-That gives us more confidence.
+Fast unit tests alone don't guarantee production readiness. To gain real confidence, test your features end-to-end, using real dependencies like databases, message brokers, or external services.
 
-I wonder if this whole idea of "We should have core domain completely independent of external dependencies" philosophy
-came from the time when testing with real dependencies is very challenging or not possible at all.
+The popular idea that "the core domain must be completely independent of external dependencies" likely originated when testing with real infrastructure was difficult or impractical. Fortunately, that's no longer the case — tools like [Testcontainers](https://testcontainers.com/) make it easy to spin up real dependencies during tests.
 
-Luckily, we have better technology now (ex: [Testcontainers](https://testcontainers.com/)) for testing with real dependencies.
-Testing with real dependencies might take slightly more time, but compared to the benefits, that's a negligible cost.
+Running such tests might take a bit longer, but the confidence and reliability they provide are well worth the trade-off.
