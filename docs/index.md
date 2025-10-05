@@ -11,17 +11,18 @@ Along with these principles, they also introduced certain practices that made se
 
 However, over time, some of these practices have been taken to extremes. You'll often hear recommendations like:
 
-* "Your business logic should depend only on the JDK — no external libraries allowed."
-* "Create your own logging abstraction."
-* "Avoid framework annotations and write XML instead to keep your core 'pure'"
+* Your business logic should depend only on the JDK — no external libraries allowed
+* Create your own logging abstraction
+* Avoid framework annotations and write XML instead to keep your core 'pure'
 
 While these ideas may sound elegant in theory, in practice they often add unnecessary complexity.
 Modern frameworks and libraries already solve many of these recurring problems. In the real world, companies rarely switch frameworks, databases, or message brokers overnight. Building multiple abstraction layers just to guard against that possibility usually results in more boilerplate and less productivity.
 
 I've seen teams implementing Clean, Hexagonal, or Onion architectures spend a surprising amount of time on:
 
-* Copying data objects across multiple layers,
-* Creating endless interfaces with only one implementation,
+* Endless copying of data from one layer to another
+* Creating unnecessary interfaces
+* Creating endless interfaces with only one implementation
 * Re-implementing features (like cross-cutting concerns) that frameworks already handle elegantly.
 
 With the tools we have today — Mockito for mocking concrete classes, Testcontainers for testing with real dependencies, and frameworks like Spring Boot or Quarkus that already abstract away much of the complexity — many of these additional layers are simply unnecessary.
