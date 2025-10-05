@@ -9,12 +9,13 @@ That said, it's not about choosing only unit tests or only integration tests. Th
 2. **Unit Tests:** Validate the behavior of a single unit (which could be one class or a group of closely related classes) by mocking external dependencies.
 3. **Slice Tests:** While integration tests are valuable, it's not always necessary to spin up all dependencies for certain scenarios. For example, when testing invalid REST API payloads, you don't need a database or message broker. In such cases, slice tests are ideal — they load only a subset of components while mocking the rest. In Spring Boot, you can use annotations like `@WebMvcTest`, `@DataJpaTest`, and others to achieve this.
 
-### Tips:
+
+## 2. Testcontainers tests are taking too much time. What should I do?
 1. Use [Testcontainers Singleton approach](https://www.sivalabs.in/blog/run-spring-boot-testcontainers-tests-at-jet-speed/) to use the same containers for all tests.
-2. Use [Testcontainers reuse](https://java.testcontainers.org/features/reuse/) feature to keep the containers running in background instead of stopping and restarting.
+2. Use [Testcontainers reuse](https://java.testcontainers.org/features/reuse/) feature to keep the containers running in the background instead of stopping and restarting.
 3. If you are using Testcontainers with PostgreSQL, consider using [dbsandboxer](https://github.com/misirio/dbsandboxer) to speed up test execution by using PostgreSQL's template database feature.
 
-## 2. Mockito vs In-Memory Implementation for Mocking
+## 3. Mockito vs In-Memory Implementation for Mocking
 When writing unit tests for a service layer class(`CustomerService`), a common challenge is managing its dependencies, such as the `CustomerRepository`. We need a way to isolate the service logic from the actual data access implementation to ensure the test only validates the service's behavior. Two primary techniques for achieving this isolation are using a mocking framework like Mockito or creating an In-Memory implementation of the dependency.
 
 Let's assume the following simplified interfaces and class structures:
@@ -245,12 +246,19 @@ For example, a test verifying a feature expects a search query to return 23 reco
 
 So, I recommend using Mockito so that you control the exact conditions of the test without the maintenance overhead and brittleness associated with managing a secondary, in-memory dependency implementation.
 
-## 3. Should I aim for 100% Test Coverage?
-//TODO;
+## 4. Should I aim for 100% Test Coverage?
+Striving for 100% test coverage often leads to a blind ritual rather than a genuine pursuit of quality. While the metric was intended to encourage thorough testing, obsessively chasing the final few percentage points frequently results in writing trivial, brittle tests that simply confirm getter/setter calls or other low-value code, without actually verifying meaningful system behavior. 
 
-## 4. Testcontainers tests are taking too much time. What should I do?
-//TODO;
+The reality is that high test coverage doesn't necessarily mean high-quality code; a project can have 100% coverage yet still fail to test critical business logic or edge cases. 
 
+Instead of a rigid target, a more pragmatic approach is to aim for a solid foundation, such as 80% code coverage, prioritizing a good test suite focused on verifying system behavior, complex logic, and integration points, which provides the most value for maintaining a robust application.
 
 ## 5. How to enforce a common coding style in a team?
-//TODO;
+Code formatting and linting are frequently discussed — and sometimes hotly debated — topics within development teams. In reality, these discussions often consume more time than they should. Once a team agrees on a standard formatting approach, it typically becomes second nature within a week, and few developers think about it again.
+
+To maintain consistency and avoid unnecessary debates, it’s best to adopt a well-established tool and automate formatting as part of your build or CI process. Some popular options include:
+
+* [Spotless](https://github.com/diffplug/spotless)
+* [Google Java Format](https://github.com/google/google-java-format)
+* [Spring Java Format](https://github.com/spring-io/spring-javaformat)
+* [Prettier Java](https://github.com/jhipster/prettier-java)
