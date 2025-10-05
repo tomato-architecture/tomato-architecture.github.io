@@ -15,6 +15,7 @@ theme:
 nav:
   - Home: index.md
   - Concepts: concepts.md
+  - Recommendations: recommendations.md
   - Implementations:
       - Spring Boot: spring-boot-impl.md
   - FAQs: faq.md
