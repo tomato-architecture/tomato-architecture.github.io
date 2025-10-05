@@ -1,7 +1,18 @@
 # Recommendations
 
 ## 1. Unit vs Integration Tests
-//TODO;
+I used to strictly follow the [Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) approach, but over time, I've realized that it's not always the most effective strategy. Many of the applications I've worked on have relatively simple business logic but rely heavily on integrations with external systems such as SQL databases, messaging systems, and third-party REST APIs. For such applications, unit tests often provide limited value. Instead, I recommend focusing on integration tests that validate how the application behaves when interacting with real external systems.
+
+That said, it's not about choosing only unit tests or only integration tests. The most effective testing strategy involves a balanced mix of different types of tests to ensure comprehensive coverage and reliable behavior.
+
+1. **Integration Tests:** Validate the behavior of a feature end-to-end by interacting with real dependencies using tools like [Testcontainers](https://testcontainers.com/). An exception to this is third-party REST APIs, where you can use mocking tools such as WireMock since you may not have control over the external service.
+2. **Unit Tests:** Validate the behavior of a single unit (which could be one class or a group of closely related classes) by mocking external dependencies.
+3. **Slice Tests:** While integration tests are valuable, it's not always necessary to spin up all dependencies for certain scenarios. For example, when testing invalid REST API payloads, you don't need a database or message broker. In such cases, slice tests are ideal — they load only a subset of components while mocking the rest. In Spring Boot, you can use annotations like `@WebMvcTest`, `@DataJpaTest`, and others to achieve this.
+
+### Tips:
+1. Use [Testcontainers Singleton approach](https://www.sivalabs.in/blog/run-spring-boot-testcontainers-tests-at-jet-speed/) to use the same containers for all tests.
+2. Use [Testcontainers reuse](https://java.testcontainers.org/features/reuse/) feature to keep the containers running in background instead of stopping and restarting.
+3. If you are using Testcontainers with PostgreSQL, consider using [dbsandboxer](https://github.com/misirio/dbsandboxer) to speed up test execution by using PostgreSQL's template database feature.
 
 ## 2. Mockito vs In-Memory Implementation for Mocking
 When writing unit tests for a service layer class(`CustomerService`), a common challenge is managing its dependencies, such as the `CustomerRepository`. We need a way to isolate the service logic from the actual data access implementation to ensure the test only validates the service's behavior. Two primary techniques for achieving this isolation are using a mocking framework like Mockito or creating an In-Memory implementation of the dependency.
