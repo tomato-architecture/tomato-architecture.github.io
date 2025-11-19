@@ -1,0 +1,1109 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A pragmatic approach to software development">
+      
+      
+        <meta name="author" content="K Siva Prasad Reddy">
+      
+      
+        <link rel="canonical" href="https://tomato-architecture.netlify.app/">
+      
+      
+      
+        <link rel="next" href="concepts/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Tomato Architecture</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tomato-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Tomato Architecture" class="md-header__button md-logo" aria-label="Tomato Architecture" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tomato Architecture
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tomato-architecture/tomato-architecture.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tomato-architecture/tomato-architecture.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Tomato Architecture" class="md-nav__button md-logo" aria-label="Tomato Architecture" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tomato Architecture
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tomato-architecture/tomato-architecture.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tomato-architecture/tomato-architecture.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Guidelines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-package-by-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Package by feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-application-core-for-business-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. "Application Core" for Business Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-separation-of-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Separation of Concerns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-domain-logic-in-domain-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Domain logic in domain objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-no-unnecessary-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. No unnecessary interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-embrace-frameworks-power-and-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Embrace framework's power and flexibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-test-not-only-units-but-whole-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Test not only units, but whole features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="recommendations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recommendations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Implementations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spring-boot-impl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Diagram
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Guidelines
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-package-by-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Package by feature
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-application-core-for-business-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. "Application Core" for Business Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-separation-of-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Separation of Concerns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-domain-logic-in-domain-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Domain logic in domain objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-no-unnecessary-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. No unnecessary interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-embrace-frameworks-power-and-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Embrace framework's power and flexibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-test-not-only-units-but-whole-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Test not only units, but whole features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tomato-architecture">Tomato Architecture</h1>
+<p><img alt="tomato-architecture-logo.png" src="assets/tomato-arc-logo.png" /></p>
+<p><strong>Tomato Architecture</strong> is a pragmatic approach to software architecture following the <strong>Core Principles</strong></p>
+<h2 id="background">Background</h2>
+<p>When I began exploring software architecture, I came across several well-known approaches such as <a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>, <a href="https://alistair.cockburn.us/hexagonal-architecture">The Hexagonal (Ports &amp; Adapters) Architecture</a>, and <a href="https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/">Onion Architecture</a>. At their core, these architectures share similar goals — promoting solid software design principles like separation of concerns, testability, and loose coupling.</p>
+<p>Along with these principles, they also introduced certain practices that made sense for their time. For instance, when integration testing used to be difficult, isolating business logic from framework dependencies and "programming to interfaces" were great strategies to enable in-memory or mocked testing. Those ideas worked well for the challenges of that era.</p>
+<p>However, over time, some of these practices have been taken to extremes. You'll often hear recommendations like:</p>
+<ul>
+<li>Your business logic should depend only on the JDK — no external libraries allowed</li>
+<li>Create your own logging abstraction</li>
+<li>Avoid framework annotations and write XML instead to keep your core 'pure'</li>
+</ul>
+<p>While these ideas may sound elegant in theory, in practice they often add unnecessary complexity.
+Modern frameworks and libraries already solve many of these recurring problems. In the real world, companies rarely switch frameworks, databases, or message brokers overnight. Building multiple abstraction layers just to guard against that possibility usually results in more boilerplate and less productivity.</p>
+<p>I've seen teams implementing Clean, Hexagonal, or Onion architectures spend a surprising amount of time on:</p>
+<ul>
+<li>Endless copying of data from one layer to another</li>
+<li>Creating unnecessary interfaces</li>
+<li>Creating endless interfaces with only one implementation</li>
+<li>Re-implementing features (like cross-cutting concerns) that frameworks already handle elegantly.</li>
+</ul>
+<p>With the tools we have today — Mockito for mocking concrete classes, Testcontainers for testing with real dependencies, and frameworks like Spring Boot or Quarkus that already abstract away much of the complexity — many of these additional layers are simply unnecessary.</p>
+<p><img alt="cargo-cult-programming.png" src="assets/cargo-cult-programming.png" /></p>
+<p>So I decided to take a more pragmatic approach:
+<strong>Keep the timeless principles, embrace modern tooling, and focus on building simple, testable, and maintainable software — without the dogma or ceremony.</strong></p>
+<p>That's how <strong>Tomato Architecture</strong> was born:
+<strong>A blend of the best ideas from existing architectures, minus the cargo-cult, idealistic, and purist mindset.</strong></p>
+<h2 id="core-principles">Core Principles</h2>
+<ul>
+<li>Focus on simplicity — solve today's problems without overengineering for hypothetical future needs.</li>
+<li>Research, evaluate, and then commit to the right technologies instead of building layers of unnecessary abstraction for the sake of "future replaceability."</li>
+<li>Design systems that work cohesively as a whole, not just as isolated, well-tested components.</li>
+<li>Make architectural decisions based on what truly benefits your software — not merely because it's a trend or endorsed by popular voices.</li>
+</ul>
+<p><img alt="tomato-architecture-logo.png" src="assets/tomato-architecture-principles.png" /></p>
+<h2 id="architecture-diagram">Architecture Diagram</h2>
+<p>A simple layered architecture with strict modularity goes a long way towards achieving the Tomato Architecture goals.</p>
+<p><img alt="tomato-architecture.png" src="assets/tomato-architecture.png" /></p>
+<h2 id="implementation-guidelines">Implementation Guidelines</h2>
+<h3 id="1-package-by-feature">1. Package by feature</h3>
+<p>A common way to organize code is by technical layers — separating controllers, services, repositories, and so on.
+While this approach can work well for a microservice that already represents a single, well-defined business capability, it often becomes cumbersome in larger applications.</p>
+<p>For monolithic or modular-monolithic architectures, it is strongly recommended to organize code by feature rather than by technical layer. This structure keeps related functionality together, making the codebase easier to navigate, maintain, and evolve.</p>
+<p>For a deeper dive, check out: <a href="https://phauer.com/2020/package-by-feature/">https://phauer.com/2020/package-by-feature/</a></p>
+<h3 id="2-application-core-for-business-logic">2. "Application Core" for Business Logic</h3>
+<p>Keep the <strong>Application Core</strong> completely independent of any delivery mechanism — whether it's a web API, scheduled job, or command-line interface.</p>
+<p>The core should expose well-defined APIs that can be invoked directly from a simple <code>main()</code> method.
+To achieve this, the Application Core must remain agnostic to its execution context — it should not depend on HTTP frameworks, web libraries, or any delivery-specific components.</p>
+<p>Likewise, if the same core logic is reused in scheduled jobs or CLI tools, ensure that scheduling or command execution details never leak into the Application Core.</p>
+<h3 id="3-separation-of-concerns">3. Separation of Concerns</h3>
+<p>Keep the business logic execution independent of how the input arrives — whether through web controllers, message listeners, or scheduled jobs.</p>
+<p>Input sources should act as thin layer to extract the required data from the request source and delegate all business logic to the Application Core.</p>
+<p><strong>🚫 DON'T DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@RestController</span>
+<span class="kd">class</span> <span class="nc">CustomerController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerService</span><span class="w"> </span><span class="n">customerService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/api/customers&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">createCustomer</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">Customer</span><span class="w"> </span><span class="n">customer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="k">if</span><span class="p">(</span><span class="n">customerService</span><span class="p">.</span><span class="na">existsByEmail</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="na">getEmail</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EmailAlreadyInUseException</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="na">getEmail</span><span class="p">());</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">       </span><span class="n">customer</span><span class="p">.</span><span class="na">setCreateAt</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+<span class="w">       </span><span class="n">customerService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">customer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>✅ INSTEAD, DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@RestController</span>
+<span class="kd">class</span> <span class="nc">CustomerController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerService</span><span class="w"> </span><span class="n">customerService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/api/customers&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">createCustomer</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">Customer</span><span class="w"> </span><span class="n">customer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">customerService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">customer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="kd">class</span> <span class="nc">CustomerService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerRepository</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Transactional</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="n">Customer</span><span class="w"> </span><span class="n">customer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">customerRepository</span><span class="p">.</span><span class="na">existsByEmail</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="na">getEmail</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EmailAlreadyInUseException</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="na">getEmail</span><span class="p">());</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">customer</span><span class="p">.</span><span class="na">setCreateAt</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+<span class="w">      </span><span class="n">customerRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">customer</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>With this approach, whether a customer is created via REST, CLI, or any other interface, the business logic remains centralized in the Application Core.</p>
+<p><strong>🚫 DON'T DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">OrderProcessingJob</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OrderService</span><span class="w"> </span><span class="n">orderService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Scheduled</span><span class="p">(</span><span class="n">cron</span><span class="o">=</span><span class="s">&quot;0 * * * * *&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderService</span><span class="p">.</span><span class="na">findPendingOrders</span><span class="p">();</span>
+<span class="w">       </span><span class="k">for</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">orders</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="k">this</span><span class="p">.</span><span class="na">processOrder</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="p">...</span>
+<span class="w">       </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>✅ INSTEAD, DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">OrderProcessingJob</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OrderService</span><span class="w"> </span><span class="n">orderService</span><span class="p">;</span>
+
+<span class="w">   </span><span class="nd">@Scheduled</span><span class="p">(</span><span class="n">cron</span><span class="o">=</span><span class="s">&quot;0 * * * * *&quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderService</span><span class="p">.</span><span class="na">findPendingOrders</span><span class="p">();</span>
+<span class="w">      </span><span class="n">orderService</span><span class="p">.</span><span class="na">processOrders</span><span class="p">(</span><span class="n">orders</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processOrders</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orders</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="p">...</span>
+<span class="w">       </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This decouples order processing logic from the scheduler, allowing you to test and reuse it independently of any scheduling mechanism.</p>
+<p>Your Application Core may interact with databases, message brokers, or third-party services — but ensure these integrations don't leak into your business logic.</p>
+<p>For example, when using a persistence framework like Spring Data JPA, avoid tying your service logic directly to its APIs.</p>
+<p><strong>🚫 DON'T DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">class</span> <span class="nc">CustomerService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerRepository</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">PagedResult</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCustomers</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">pageNo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Pageable</span><span class="w"> </span><span class="n">pageable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PageRequest</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">pageNo</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">Sort</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">));</span>
+<span class="w">      </span><span class="n">Page</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cusomersPage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">(</span><span class="n">pageable</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">convertToPagedResult</span><span class="p">(</span><span class="n">cusomersPage</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>✅ INSTEAD, DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">class</span> <span class="nc">CustomerService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerRepository</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">;</span>
+
+<span class="w">   </span><span class="n">PagedResult</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCustomers</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">pageNo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">customerRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">(</span><span class="n">pageNo</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">class</span> <span class="nc">JpaCustomerRepository</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="n">PagedResult</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findAll</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">pageNo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Pageable</span><span class="w"> </span><span class="n">pageable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PageRequest</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">pageNo</span><span class="p">,</span><span class="w"> </span><span class="n">PAGE_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">Sort</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">));</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">...;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This way, changes to your persistence framework or infrastructure only affect the repository layer, leaving your business logic clean and stable.</p>
+<h3 id="4-domain-logic-in-domain-objects">4. Domain logic in domain objects</h3>
+<p>Keep domain behavior close to the data it operates on — inside your domain objects.</p>
+<p><strong>🚫 DON'T DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="nc">Cart</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">LineItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">class</span> <span class="nc">CartService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="n">CartDTO</span><span class="w"> </span><span class="nf">getCart</span><span class="p">(</span><span class="n">UUID</span><span class="w"> </span><span class="n">cartId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Cart</span><span class="w"> </span><span class="n">cart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cartRepository</span><span class="p">.</span><span class="na">getCart</span><span class="p">(</span><span class="n">cartId</span><span class="p">);</span>
+<span class="w">      </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">cartTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">calculateCartTotal</span><span class="p">(</span><span class="n">cart</span><span class="p">);</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="n">BigDecimal</span><span class="w"> </span><span class="nf">calculateCartTotal</span><span class="p">(</span><span class="n">Cart</span><span class="w"> </span><span class="n">cart</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>In this example, the <code>calculateCartTotal()</code> method contains pure domain logic based solely on the state of <code>Cart</code>.
+Such logic belongs inside the <code>Cart</code> domain object itself — not in a service class.</p>
+<p><strong>✅ INSTEAD, DO THIS</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">class</span> <span class="nc">Cart</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">LineItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
+
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="n">BigDecimal</span><span class="w"> </span><span class="nf">getTotal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">class</span> <span class="nc">CartService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="n">CartDTO</span><span class="w"> </span><span class="nf">getCart</span><span class="p">(</span><span class="n">UUID</span><span class="w"> </span><span class="n">cartId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Cart</span><span class="w"> </span><span class="n">cart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cartRepository</span><span class="p">.</span><span class="na">getCart</span><span class="p">(</span><span class="n">cartId</span><span class="p">);</span>
+<span class="w">      </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">cartTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cart</span><span class="p">.</span><span class="na">getTotal</span><span class="p">();</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="5-no-unnecessary-interfaces">5. No unnecessary interfaces</h3>
+<p>Don't create interfaces just because "we might need another implementation someday."
+If that day ever comes, modern IDEs make it trivial to extract an interface with just a few keystrokes.</p>
+<p>If your only reason for introducing an interface is to make testing easier — you don't need to.
+Mocking frameworks like Mockito can mock concrete classes just fine.</p>
+<p>In short, only create interfaces when you have a clear and valid reason — not out of habit or hypothetical future needs.</p>
+<h3 id="6-embrace-frameworks-power-and-flexibility">6. Embrace framework's power and flexibility</h3>
+<p>Frameworks and libraries are built to solve the common challenges that most applications face.
+When you adopt one to accelerate development, make full use of its strengths — embrace it rather than hide it.</p>
+<p>Creating extra layers of abstraction on top of your chosen framework, just in case you might switch to another someday, is usually counterproductive. It adds complexity without real benefit and often prevents you from leveraging the framework's full potential.</p>
+<p>For example, the Spring Framework already provides powerful, declarative support for transactions, caching, and method-level security.
+Re-creating these mechanisms through custom annotations that merely delegate to Spring's features offers no real advantage.</p>
+<p>Instead, use the framework directly — or if you need additional semantics, compose your own annotations on top of it, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@Target</span><span class="p">(</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">)</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">UseCase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nd">@AliasFor</span><span class="p">(</span>
+<span class="w">        </span><span class="n">annotation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Transactional</span><span class="p">.</span><span class="na">class</span>
+<span class="w">   </span><span class="p">)</span>
+<span class="w">   </span><span class="n">Propagation</span><span class="w"> </span><span class="nf">propagation</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">REQUIRED</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This approach keeps your code expressive while still taking full advantage of the framework's capabilities.</p>
+<h3 id="7-test-not-only-units-but-whole-features">7. Test not only units, but whole features</h3>
+<p>Unit tests are essential — they validate individual pieces of business logic, often by mocking external dependencies. But beyond that, it's even more important to ensure that a complete feature actually works as expected.</p>
+<p>Fast unit tests alone don't guarantee production readiness. To gain real confidence, test your features end-to-end, using real dependencies like databases, message brokers, or external services.</p>
+<p>The popular idea that "the core domain must be completely independent of external dependencies" likely originated when testing with real infrastructure was difficult or impractical. Fortunately, that's no longer the case — tools like <a href="https://testcontainers.com/">Testcontainers</a> make it easy to spin up real dependencies during tests.</p>
+<p>Running such tests might take a bit longer, but the confidence and reliability they provide are well worth the trade-off.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 SivaLabs
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/tomato-architecture" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/sivalabs" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/ksivaprasadreddy/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
